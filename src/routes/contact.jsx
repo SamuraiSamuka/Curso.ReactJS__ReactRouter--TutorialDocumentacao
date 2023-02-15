@@ -1,6 +1,7 @@
 import { Form } from "react-router-dom";
 
 export default function Contact() {
+  // contato de exemplo
   const contact = {
     first: "Samuel",
     last: "Carvalho",
@@ -10,8 +11,10 @@ export default function Contact() {
     favorite: true,
   };
 
+  // Cria contatos
   return (
     <div id="contact">
+      {/* Imagem do contato*/}
       <div>
         <img
           key={contact.avatar}
@@ -20,6 +23,7 @@ export default function Contact() {
       </div>
 
       <div>
+        {/* nome do contato + icone de favoritar */}
         <h1>
           {contact.first || contact.last ? (
             <>
@@ -31,6 +35,7 @@ export default function Contact() {
           <Favorite contact={contact} />
         </h1>
 
+        {/* link para o twitter*/}
         {contact.twitter && (
           <p>
             <a
@@ -42,8 +47,10 @@ export default function Contact() {
           </p>
         )}
 
+        {/* Notas, um status do contato */}
         {contact.notes && <p>{contact.notes}</p>}
 
+        {/* Botões editar e deletar */}
         <div>
           <Form action="edit">
             <button type="submit">Edit</button>
@@ -69,6 +76,7 @@ export default function Contact() {
   );
 }
 
+// Adiciona a funcionalidade de favoritar aos contatos
 function Favorite({ contact }) {
   // yes, this is a `let` for later
   let favorite = contact.favorite;
