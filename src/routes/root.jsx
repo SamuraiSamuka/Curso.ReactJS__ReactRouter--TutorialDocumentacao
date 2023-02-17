@@ -3,6 +3,7 @@ import { getContacts, createContact } from "../contacts";
 
 export async function loader() {
   const contacts = await getContacts();
+  console.log({contacts}, contacts)
   return { contacts };
 }
 

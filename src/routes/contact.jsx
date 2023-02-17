@@ -1,15 +1,22 @@
-import { Form } from "react-router-dom";
+import { Form, useLoaderData } from "react-router-dom";
+import { getContact } from "../contacts";
+
+export async function loader({params}) {
+  const contact = await getContact(params.contactId)
+  return { contact };
+}
 
 export default function Contact() {
+  const { contact } = useLoaderData();
   // contato de exemplo
-  const contact = {
-    first: "Samuel",
-    last: "Carvalho",
-    avatar: "https://github.com/SamuraiSamuka.png",
-    twitter: "sam__dev_",
-    notes: "Não é porque as coisas são difíceis que não ousamos; é porque não ousamos que as coisas são difíceis.",
-    favorite: true,
-  };
+  // const contact = {
+  //   first: "Samuel",
+  //   last: "Carvalho",
+  //   avatar: "https://github.com/SamuraiSamuka.png",
+  //   twitter: "sam__dev_",
+  //   notes: "Não é porque as coisas são difíceis que não ousamos; é porque não ousamos que as coisas são difíceis.",
+  //   favorite: true,
+  // };
 
   // Cria contatos
   return (
