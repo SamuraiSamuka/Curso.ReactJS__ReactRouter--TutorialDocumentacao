@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 import { Form, NavLink, Outlet, redirect, useLoaderData, useNavigation, useSubmit } from "react-router-dom";
-import { getContacts, createContact } from "../contacts";
+import { getContacts, createContact, updateContact } from "../contacts";
 
 export async function loader({ request }) {
   const url = new URL(request.url)
@@ -37,7 +37,7 @@ export default function Root() {
               id="q"
               className={searching ? "loading": ""}
               aria-label="Search contacts"
-              placeholder="Search"
+              placeholder="Pesquise"
               type="search"
               name="q"
               defaultValue={q}
@@ -59,7 +59,7 @@ export default function Root() {
             ></div>
           </Form>
           <Form method="post">
-            <button type="submit">New</button>
+            <button type="submit">Novo</button>
           </Form>
         </div>
         <nav>
@@ -81,7 +81,7 @@ export default function Root() {
                         {contact.first} {contact.last}
                       </>
                     ) : (
-                      <i>No Name</i>
+                      <i>Sem nome</i>
                     )}{" "}
                     {contact.favorite && <span>★</span>}
                   </NavLink>
@@ -90,7 +90,7 @@ export default function Root() {
             </ul>
           ) : (
             <p>
-              <i>No contacts</i>
+              <i>Não há contatos</i>
             </p>
           )}
         </nav>

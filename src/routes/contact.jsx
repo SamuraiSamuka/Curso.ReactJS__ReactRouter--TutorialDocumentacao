@@ -27,8 +27,8 @@ export default function Contact() {
   //   first: "Samuel",
   //   last: "Carvalho",
   //   avatar: "https://github.com/SamuraiSamuka.png",
-  //   twitter: "sam__dev_",
-  //   notes: "Não é porque as coisas são difíceis que não ousamos; é porque não ousamos que as coisas são difíceis.",
+  //   linkedin: "sam__dev_",
+  //   notes: "Desenvolvedor full-stack em desenvolvimento",
   //   favorite: true,
   // };
 
@@ -56,14 +56,14 @@ export default function Contact() {
           <Favorite contact={contact} />
         </h1>
 
-        {/* link para o twitter*/}
-        {contact.twitter && (
+        {/* link para o linkedin*/}
+        {contact.linkedin && (
           <p>
             <a
               target="_blank"
-              href={`https://twitter.com/${contact.twitter}`}
+              href={`${contact.linkedin}`}
             >
-              {contact.twitter}
+              {(contact.linkedin).substring(27)}
             </a>
           </p>
         )}
@@ -74,7 +74,7 @@ export default function Contact() {
         {/* Botões editar e deletar */}
         <div>
           <Form action="edit">
-            <button type="submit">Edit</button>
+            <button type="submit">Editar</button>
           </Form>
           <Form
             method="post"
@@ -82,14 +82,14 @@ export default function Contact() {
             onSubmit={(event) => {
               if (
                 !confirm(
-                  "Please confirm you want to delete this record."
+                  "Por favor confirme que você deseja deletar este contato."
                 )
               ) {
                 event.preventDefault();
               }
             }}
           >
-            <button type="submit">Delete</button>
+            <button type="submit">Deletar</button>
           </Form>
         </div>
       </div>

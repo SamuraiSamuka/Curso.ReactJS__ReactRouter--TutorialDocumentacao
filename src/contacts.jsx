@@ -6,7 +6,21 @@ import sortBy from "sort-by"; // Algoritmo de ordenação simples
 export async function getContacts(query) {
   await fakeNetwork(`getContacts:${query}`);
   let contacts = await localforage.getItem("contacts"); 
-  if (!contacts) contacts = []; // Caso contatos seja nulo ele recebe um array vazio
+  if (!contacts) {
+    let id = Math.random().toString(36).substring(2, 9);
+    let contact = { id, createdAt: Date.now() };
+    Object.assign(contact, {
+      first: "Samuel",
+      last: "Carvalho",
+      avatar: "https://github.com/SamuraiSamuka.png",
+      linkedin: "https://www.linkedin.com/in/samuel-silva-de-carvalho/",
+      notes: "Desenvolvedor full-stack em desenvolvimento",
+      favorite: true,
+    })
+    contacts = [ contact ]
+    set(contacts)
+  }; // Caso contatos seja nulo ele recebe um array vazio
+
   if (query) {
     contacts = matchSorter(contacts, query, { keys: ["first", "last"] }); // busca os resultados
   }
