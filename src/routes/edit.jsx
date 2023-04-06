@@ -1,5 +1,5 @@
 import { Form, useLoaderData, redirect, useNavigate } from "react-router-dom";
-import { updateContact } from "../contacts";
+import { getContact, updateContact } from "../contacts";
 
 export async function action({request, params}) {
     const formData = await request.formData(); // Seleciona os dados da requisição relativos ao formulário.
@@ -10,8 +10,19 @@ export async function action({request, params}) {
     return redirect(`/contacts/${params.contactId}`);
 }
 
+export async function loader({params}) {
+  const contact = await getContact(params.contactId);
+  if(!contact) {
+    throw new Response("", {
+      status: 404,
+      statusText: "Erro 404: Não encontrado",
+    });
+  }
+  return { contact };
+}
+
 export default function EditContact() {
-  const contact = useLoaderData();
+  const { contact } = useLoaderData();
   const navigate = useNavigate();
 
   return (
@@ -24,6 +35,7 @@ export default function EditContact() {
           type="text"
           name="first"
           defaultValue={contact.first}
+          required
         />
         <input
           placeholder="Sobrenome"
@@ -31,6 +43,7 @@ export default function EditContact() {
           type="text"
           name="last"
           defaultValue={contact.last}
+          required
         />
       </p>
       <label>
@@ -40,6 +53,7 @@ export default function EditContact() {
           name="linkedin"
           placeholder="https://www.linkedin.com/in/usuario"
           defaultValue={contact.linkedin}
+          required
         />
       </label>
       <label>
